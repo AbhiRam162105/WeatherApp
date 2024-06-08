@@ -1,7 +1,7 @@
 const url = "https://api.openweathermap.org/data/2.5/weather";
 const apiKey = "f00c38e0279b7bc85480c3fe775d518c";
 
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
   weatherFn("Pune");
 });
 
@@ -21,11 +21,21 @@ async function weatherFn(cName) {
 }
 
 function weatherShowFn(data) {
-  $("#city-name").text(data.name);
-  $("#date").text(moment().format("MMMM Do YYYY, h:mm:ss a"));
-  $("#temperature").html(`${data.main.temp}°C`);
-  $("#description").text(data.weather[0].description);
-  $("#wind-speed").html(`Wind Speed: ${data.wind.speed} m/s`);
-  $("#weather-icon").attr("src", `...`);
-  $("#weather-info").fadeIn();
+  document.getElementById("city-name").textContent = data.name;
+  document.getElementById("date").textContent = moment().format(
+    "MMMM Do YYYY, h:mm:ss a"
+  );
+  document.getElementById("temperature").innerHTML = `${data.main.temp}°C`;
+  document.getElementById("description").textContent =
+    data.weather[0].description;
+  document.getElementById(
+    "wind-speed"
+  ).innerHTML = `Wind Speed: ${data.wind.speed} m/s`;
+  document
+    .getElementById("weather-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
+    );
+  document.getElementById("weather-info").style.display = "block";
 }
